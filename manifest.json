@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Bi-Co Course Selection Helper",
+    "description": "Making it quicker and easier to choose your courses on Bionic.",
+    "version": "0.1.0",
+    
+    "background": 
+    {
+        "service_worker": "background.js"
+    },
+
+    
+    "permissions": ["storage", "activeTab", "scripting", "tabs"],
+
+    "host_permissions": ["<all_urls>"],
+    "web_accessible_resources": [
+        {
+            "resources": ["prereqs.json", "times.json"],
+            "matches": ["<all_urls>"]
+        }
+    ]
+} 
