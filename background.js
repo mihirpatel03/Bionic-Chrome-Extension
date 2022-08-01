@@ -11,7 +11,6 @@ function setPage(prereqs, times, enrolledClasses, notice) {
             req = prereqs[msg.className]
 
 
-
             //if undefined, set it to blank, instead of undefined (so it prints nothing instead of printing undefined on the content page)
             if (req == undefined) {
                 req = ''
@@ -19,18 +18,14 @@ function setPage(prereqs, times, enrolledClasses, notice) {
             //similarly, t is the time of the class we received
             t = times[msg.className]
 
-            // console.log(times['MATHH333A'].length)
-            // c = 'white'
-
             //if undefined or empty (usually independent study), set color to green, because this most likely means that it works with schedule, 
             //otherwise, calculate the color of the row given the class time, and the list of class times of enrolled classes
             if (t == undefined || t == [] || t.length == 0) {
-                c = 'lightgreen'
+                c = '9af5b2'
             }
             else {
                 c = timeIntersect(t, enrolledClasses)
             }
-
 
             //return the msg with the prereq text, the color of the row, and a notice if we don't yet have the list of enrolled classes
             port.postMessage({classPrereq: req, color: c, notice: notice});
@@ -49,42 +44,48 @@ function has_overlap(a_start, a_end, b_start, b_end) {
 function timeIntersect(class1, classList) {
 
     len = classList.length  //length of the entire list (which has been concatenated into the form [])
+    //if the class time is empty or undefined (basically not a standard time), we can make it green 
+    //because it is most likely an independent study or research
     if (class1==[] || class1==undefined || class1.length == 0) {
-        return 'lightgreen'
+        return '9af5b2'
     }
     else {
-        len2 = class1[0].length //length of the class1 within first brackets (i.e. how many different weekdays the class meets)
+        len2 = class1[0].length //=(how many different weekdays the class meets)
     }
 
-    //HAVE TO FIGURE OUT WAY FOR WHEN TWO CLASSES
+
     for (i=0; i<len; i++) { //looping through each class in classlist
-        for (j=0; j<classList[i][0].length; j++) { //looping through each meeting time of i (will give us terms in the form [start, end])
-            count = 0
-            for (k=0; k<class1.length; k++) {
-                overlap = false
-                for (l=0; l<class1[k].length; l++) { //looping through every meeting time of class1 (will give us terms in the form [start, end])
+        //looping through each meeting time of i (will give us terms in the form [start, end], 
+        //assuming we have only one section of the class)
+        for (j=0; j<classList[i][0].length; j++) { 
+            count = 0 //count of overlaps, i.e. checking for each possible section of class1, does it overlap?
+            for (k=0; k<class1.length; k++) { //looping through every possible section the class meets
+                overlap = false //set overlap to false for this specific section in the search tab
+                //looping through every day of the week meeting time of class1 (will give us terms in the form [start, end])
+                for (l=0; l<class1[k].length; l++) { 
+                    //checking overlap between the two sets of times in enrolledClasses and search tab
                     if (has_overlap(class1[k][l][0], class1[k][l][1], classList[i][0][j][0], classList[i][0][j][1])) {
-                        //if has overlap, return red. If none of these possible combinations have overlap, return green
+                        
                         overlap = true
-                        //return 'indianred'
                     }
                 }
+                //if out of all the possible time combinations between two class sections, there is overlap, increment count
                 if (overlap==true) {
                     count = count+1
                 }
             }
-            // console.log(count)
-            // console.log(class1.length)
-            // console.log('--------------------')
+
+            //if the amount of overlaps = amount of possible sections, there is no way to make it work w/ schedule
             if (count == class1.length) {
-                return 'indianred'
+                //return 'f76a71' //red
+                return '7ae6f0'
             }
             
-            //have a loop in the innermost for looking at the class1 if multiple different class periods in search
         }
 
     }
-    return 'lightgreen'
+    //otherwise, the class works with our schedule, so return light green
+    return '9af5b2' //green
 }
 
 //helper function to change a list of classname strings into a list in our int list time format

@@ -20,7 +20,7 @@ port.onMessage.addListener(function(msg){
         const newText = document.createElement('div')
         newText.innerHTML = msg.classPrereq
         document.getElementById('PTS_RSLTS_LIST$0_row_'+x).appendChild(newText)
-        document.getElementById('PTS_RSLTS_LIST$0_row_'+x).style.background = msg.color
+        document.getElementById('PTS_RSLTS_LIST$0_row_'+x).style.background = String('#'+msg.color)
         x++
     }
     else {
