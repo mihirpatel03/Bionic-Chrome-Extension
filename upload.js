@@ -1,0 +1,1 @@
+alert('Please visit the "View My Classes" tab first')
