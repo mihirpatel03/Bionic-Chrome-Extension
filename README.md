@@ -11,6 +11,7 @@ save students time in the often tedious process of course selection. Instead of 
 enrolled classes, the extension does it for them. Instead of having to click on each class one by one and read a lengthy paragraph
 to find if they can even take the course because of prerequisites, this saves time and effort by simply displaying it on the main page.
 
+
 ## Getting Started
 
 ### Dependencies
