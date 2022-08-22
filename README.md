@@ -23,4 +23,12 @@ https://user-images.githubusercontent.com/68386426/186010164-e7966919-da7c-4784-
 
 ### Installing/Executing Program
 
-If you are able to access Bionic, 
+If you are able to access Bionic, in order to use the program:
+
+-Click on the green 'Code' button, and then download the repository as zip file
+
+-Once you have the files stored locally, open Google Chrome and click on the puzzle piece at the top right, then 'Manage Extensions'
+
+-At the top left, click on 'Load Unpacked', and then find and open the folder with the files from github.
+
+Now when you search for classes on Bionic, the extension should be making modifications to the search tab.
